@@ -33,12 +33,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-					@auth()
+					@role('admin')
+                    @auth()                  
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
+						<li class="nav-item">
+                            <a href="{{ url('/cursos') }}" class="nav-link"><i class="fab fa-laravel text-info"></i> Cursos</a> 
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/usuarios') }}" class="nav-link"><i class="fab fa-laravel text-info"></i> Usuarios</a> 
+                        </li>						
                     </ul>
 					@endauth()
-					
+					@endrole
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -83,10 +90,10 @@
         </main>
     </div>
     @livewireScripts
-<script type="text/javascript">
-	window.livewire.on('closeModal', () => {
-		$('#createDataModal').modal('hide');
-	});
-</script>
+    <script type="text/javascript">
+	    window.livewire.on('closeModal', () => {
+		    $('#createDataModal').modal('hide');
+	    });
+    </script>
 </body>
 </html>

@@ -1,16 +1,16 @@
 @extends('layouts.app')
+@role('admin')
 @section('title', __('Dashboard'))
 @section('content')
 <div class="container-fluid">
-<div class="row justify-content-center">
-	<div class="col-md-12">
-		<div class="card">
+  <div class="row justify-content-center">
+	  <div class="col-md-12">
+		  <div class="card">
 			<div class="card-header"><h5><span class="text-center fa fa-home"></span> @yield('title')</h5></div>
 			<div class="card-body">
 				<h5>Hi <strong>{{ Auth::user()->name }},</strong> {{ __('You are logged in to ') }}{{ config('app.name', 'Laravel') }}</h5>
 				</br> 
-				<hr>
-								
+				<hr>								
 			<div class="row w-100">
 					<div class="col-md-3">
 						<div class="card border-info mx-sm-1 p-3">
@@ -42,8 +42,23 @@
 					</div>
 				 </div>				
 			</div>
-		</div>
-	</div>
-</div>
+		  </div>
+	  </div>
+  </div>
 </div>
 @endsection
+@endrole
+@role('profesor')
+@include('layouts.head')
+@section('content')	
+   @livewire('cursos')
+@endsection
+@include('layouts.foot')
+@endrole
+@role('alumno')
+@include('layouts.head')
+@section('content')
+  @livewire('cursos')
+@endsection
+@include('layouts.foot')
+@endrole
