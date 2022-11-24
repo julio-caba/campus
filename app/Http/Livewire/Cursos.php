@@ -13,7 +13,7 @@ class Cursos extends Component
     use WithFileUploads;
 
 	protected $paginationTheme = 'bootstrap';
-    public $selected_id, $keyWord, $imagen, $titulo, $descripcion, $profesor;
+    public $selected_id, $keyWord, $imagen, $titulo, $descripcion, $profesor, $fechaInicio;
     public $updateMode = false;
 
     public function render()
@@ -25,6 +25,7 @@ class Cursos extends Component
 						->orWhere('titulo', 'LIKE', $keyWord)
 						->orWhere('descripcion', 'LIKE', $keyWord)
 						->orWhere('profesor', 'LIKE', $keyWord)
+                        ->orWhere('fechaInicio', 'LIKE', $keyWord)
 						->paginate(10),
         ]);
     }
@@ -41,6 +42,7 @@ class Cursos extends Component
 		$this->titulo = null;
 		$this->descripcion = null;
 		$this->profesor = null;
+        $this->fechaInicio = null;
     }
 
     public function store()
@@ -50,13 +52,15 @@ class Cursos extends Component
 		'titulo' => 'required',
 		'descripcion' => 'required',
 		'profesor' => 'required',
+        'fechaInicio' => 'required',
         ]);
 
         Curso::create([ 
 			'imagen' => $this->imagen->store('images','public'),
 			'titulo' => $this-> titulo,
 			'descripcion' => $this-> descripcion,
-			'profesor' => $this-> profesor
+			'profesor' => $this-> profesor,
+            'fechaInicio' => $this-> fechaInicio
         ]);        
         
         $this->resetInput();
@@ -74,6 +78,7 @@ class Cursos extends Component
 		$this->titulo = $record-> titulo;
 		$this->descripcion = $record-> descripcion;
 		$this->profesor = $record-> profesor;
+        $this->fechaInicio = $record-> fechaInicio;
 		
         $this->updateMode = true;
     }
@@ -85,15 +90,17 @@ class Cursos extends Component
 		'titulo' => 'required',
 		'descripcion' => 'required',
 		'profesor' => 'required',
+        'fechaInicio' => 'required',
         ]);
 
         if ($this->selected_id) {
 			$record = Curso::find($this->selected_id);
             $record->update([ 
-			'imagen' => $this-> imagen->store('images','public'),
+			/* 'imagen' => $this-> imagen->store('images','public'), */
 			'titulo' => $this-> titulo,
 			'descripcion' => $this-> descripcion,
-			'profesor' => $this-> profesor
+			'profesor' => $this-> profesor,
+            'fechaInicio' => $this-> fechaInicio    
             ]);
 
             $this->resetInput();

@@ -26,6 +26,10 @@
                 <label for="profesor">Profesor:</label>
                 <input wire:model="profesor" type="text" class="form-control" id="profesor" placeholder="Profesor">@error('profesor') <span class="error text-danger">{{ $message }}</span> @enderror
             </div>
+            <div class="form-group">
+                <label for="fechaInicio">Fecha de Inicio:</label>
+                <input wire:model="fechaInicio" type="date" class="form-control" id="fechaInicio" placeholder="fechaInicio">@error('fechaInicio') <span class="error text-danger">{{ $message }}</span> @enderror
+            </div>
 
                 </form>
             </div>

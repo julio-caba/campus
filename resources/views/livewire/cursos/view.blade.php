@@ -36,6 +36,7 @@
 								<th>Titulo</th>
 								<th>Descripcion</th>
 								<th>Profesor</th>
+								<th>Fecha de Inicio</th>
 								<td>ACTIONS</td>
 							</tr>
 						</thead>
@@ -50,6 +51,7 @@
 								<td>{{ $row->titulo }}</td>
 								<td>{{ $row->descripcion }}</td>
 								<td>{{ $row->profesor }}</td>
+								<td>{{ \Carbon\Carbon::parse($row->fechaInicio)->format('d/m/Y') }}</td>
 								<td width="90">
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,12 +101,11 @@
               {{-- profesor --}}
               <div class="d-flex align-items-center">                
                 <div class="post-meta">
-				<label>Profesor:</label>
-                  <p class="post-author-list">{{ $row->profesor }}</p>
-                  {{-- timestamp --}}
-                  <p class="post-date">
-                    {{-- <time datetime="2022-01-01">Jan 1, 2022</time> --}}
-					<time datetime="{{ $row->created_at }}">{{ $row->created_at }}</time>
+					<label>Profesor:</label>
+                  	<p class="post-author-list">{{ $row->profesor }}</p>
+                  	<p class="post-date">
+				  	<label>Fecha de Inicio:</label>                    
+					<time datetime="{{ $row->fechaInicio }}">{{ \Carbon\Carbon::parse($row->fechaInicio)->format('d/m/Y') }}</time>
                   </p>
                 </div>
               </div>
@@ -126,19 +127,26 @@
           <p>Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop</p>
         </div>
 		<!-- Service Item -->          
-        <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+		  
+        <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">	
+		@foreach($cursos as $row)	
           <div class="col-lg-4 col-md-6">
             <div class="service-item  position-relative">
               <div class="icon">
                 <i class="bi bi-activity"></i>
-              </div>
-              <h3>Nesciunt Mete</h3>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-              <a href="#" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+              </div>			  
+              <h3>{{$row->titulo}}</h3>
+              <p>{{$row->descripcion}}</p>
+			  <div class="post-meta mt-3">
+			  	<label>Profesor:</label>
+                <p class="post-author-list">{{ $row->profesor }}</p>
+			  </div>	  
+              <a href="#" class="readmore stretched-link">Leer Más <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 		  <!-- End Service Item -->          
-        </div>
+		  		@endforeach
+        </div>		
       </div>
     </section>
 <!-- End Our Services Section -->
